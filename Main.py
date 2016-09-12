@@ -46,26 +46,17 @@ class PingerGui(Tkinter.Tk):
         target.configure(bg="yellow")
 
     def start(self):
-        for i in self.labelsI:
-            self.setYellow(i)
-        self.checkIps()
-
-
-    def checkIps(self):
-        del self.responses[:]
-        self.p.checkIp()
-        self.responses = self.p.getResponses()
-        print self.responses
-        x = 0
-        for i in self.responses:
-            if i == 1:
+        x=0
+        for i in self.host_ips:
+            self.setYellow(self.labelsI[x])
+            self.update()
+            if(self.p.checkSingleIp(x)):
                 self.setGreen(self.labelsI[x])
-                #self.setGreen(self.labelsN[x])
             else:
                 self.setRed(self.labelsI[x])
-                #self.setRed(self.labelsN[x])
-            x += 1
+            x+=1
         self.after(self.stime, self.start)
+
 
 
 app = PingerGui(None)

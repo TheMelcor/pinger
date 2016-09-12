@@ -42,6 +42,13 @@ class Pinger():
             else:
                 self.responses.append(0)
 
+    def checkSingleIp(self, ip):
+        response = os.system(self.command + self.host_ip[ip])
+        if response == 0:
+            return True
+        else:
+            return False
+
     def getResponses(self):
         return self.responses
 
